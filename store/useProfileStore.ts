@@ -8,7 +8,9 @@ const useProfileStore = defineStore('Profile',{
         user: undefined,
 
     }),
-    getters:{},
+    getters:{
+        isLoggedIn: (state) => !!state.user
+    },
     actions:{
         async useFetchProfile(){
             try {

@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import useProfileStore from './store/useProfileStore';
+
+const profile = useProfileStore();
+
+await profile.useFetchProfile()
+</script>
+
+
 <template>
   <div>
     <NuxtLayout>

@@ -17,9 +17,7 @@ const expenseSchema = new Schema(
       min: 0,
     },
     date:{
-      type: Date,
-      required: true,
-      default: Date.now
+      type: Date
     },
     userId: {
       type: String,

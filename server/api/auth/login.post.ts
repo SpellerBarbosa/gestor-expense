@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
         httpOnly: true,
         secure:false,
         sameSite: 'strict',
-        maxAge: 60 * 60
+        maxAge: 60 * 60 * 24
     })
 
     return {

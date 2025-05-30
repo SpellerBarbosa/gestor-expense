@@ -20,8 +20,15 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+
+  const initialDate = new Date(dateInitial);
+  const finallyDate = new Date(dateFinally);
+
+
   try {
-    const expenses = await Expense.find({userId});
+      const expenses = await Expense.find({userId: userId, date:{
+        $gte: initialDate, $lte: finallyDate
+      }});
 
     return { expenses };
   } catch (error: any) {
