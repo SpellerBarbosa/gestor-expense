@@ -1,4 +1,8 @@
-
+<script setup lang="ts">
+useSeoMeta({
+  ogImage:'/despesas.png'
+})
+</script>
 <template>
   <div>
     <NuxtLayout>
