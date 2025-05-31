@@ -32,7 +32,6 @@ const handleSubmitLogin = async () => {
     msgSuccess.value = data.message;
     user.value = "";
     password.value = "";
-    useProfile.useFetchProfile()
     sendRedirect("/dashboard");
   } catch (error: any) {
     if (error.response) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PostExpense from "./.components/PostExpense.vue";
+import PostExpense from "../dashboard/.components/PostExpense.vue";
 import Menu from "~/components/layouts/Menu.vue";
 import Top from "./.components/Top.vue";
 </script>

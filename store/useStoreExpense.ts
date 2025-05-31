@@ -35,8 +35,6 @@ const useExpenseStore = defineStore("Expense", {
         this.valueHome = submitCategory("home");
         this.valueFood = submitCategory("food");
         this.valueOthers = submitCategory("other");
-
-        console.log(this.expenses);
       } catch (error: any) {
         if (error.response) {
           const status = error.response.status;

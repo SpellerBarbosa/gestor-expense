@@ -45,28 +45,34 @@ export default defineEventHandler(async (event) => {
     }
 
     const token = jwt.sign(
-      { _id: userExist._id.toString(), name: userExist.name, user: userExist.user },
+      {
+        _id: userExist._id.toString(),
+        name: userExist.name,
+        user: userExist.user,
+      },
       SECRET
     );
 
-    setCookie(event, 'token', token, {
-        httpOnly: true,
-        secure:false,
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24
-    })
+    setCookie(event, "token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24,
+      path: "/",
+    });
 
     return {
       message: "Login efetuado com sucesso.",
     };
   } catch (error: any) {
-    if(error.statusCode) throw error;
+    if (error.statusCode) throw error;
 
-    console.error(error.message)
+    console.error(error.message);
 
     throw createError({
-        statusCode: 500,
-        statusMessage:"Conexão com servidor indisponível, tente novamente mais tarde."
-    })
+      statusCode: 500,
+      statusMessage:
+        "Conexão com servidor indisponível, tente novamente mais tarde.",
+    });
   }
 });

@@ -13,6 +13,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+ 
 
   try {
     const newExpense = await Expense.create({
@@ -20,6 +21,7 @@ export default defineEventHandler(async (event) => {
       value: value.trim(),
       category: category.toLowerCase().trim(),
       userId: userId,
+      date: date
     });
 
     return { message: "despesa lançada com sucesso." }

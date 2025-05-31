@@ -5,6 +5,7 @@ import Success from "~/components/common/Success.vue";
 import clearMessages from "~/composables/clearMessages";
 import api from "~/server/utils/axios/api";
 import useProfileStore from "~/store/useProfileStore";
+import stateMenuStore from "~/store/stateMenuStore";
 
 const description = ref<string>("");
 const value = ref<string>("");
@@ -15,7 +16,7 @@ const useProfile = useProfileStore();
 const userId = useProfile._id;
 const systemDate = new Date().toISOString().slice(0, 10);
 const selectDate = ref<string>(systemDate);
-
+const stateMenu = stateMenuStore();
 
 const handlerSubmitExpense = async () => {
   const formatValue = value.value.replace(",", ".");
@@ -24,7 +25,7 @@ const handlerSubmitExpense = async () => {
 
   if (!description.value) {
     msgError.value = "Coloque a descrição da despesa";
-    clearMessages(msgError)
+    clearMessages(msgError);
     return;
   }
 
@@ -39,8 +40,6 @@ const handlerSubmitExpense = async () => {
     clearMessages(msgError);
     return;
   }
-  
-  console.log(date.toISOString())
 
   if (!userId) {
     msgError.value = "Faça login novamente, token vencido";
@@ -54,7 +53,7 @@ const handlerSubmitExpense = async () => {
       value: realValue,
       category: category.value.toLowerCase().trim(),
       userId: userId,
-      date: date.toISOString()
+      date: date.toISOString(),
     });
     const data = response.data;
     msgSuccess.value = data.message;
@@ -83,7 +82,11 @@ const handlerSubmitExpense = async () => {
 </script>
 <template>
   <main
-    class="w-[95%] h-[50vh] flex flex-col items-center justify-evenly bg-blue-800 rounded-4xl md:w-[60%]"
+    :class="[
+      stateMenu.menu
+        ? 'w-[95%] h-[50vh] flex flex-col items-center justify-evenly bg-blue-800 rounded-4xl md:w-[60%] absolute bottom-0 mb-[12vh] transition-all duration-1000 opacity-100 lg:left-[30%] lg:w-[70%] lg:h-[100vh] lg:bottom-auto lg:rounded-none'
+        : 'transition-all duration-200 opacity-0 bottom-0 absolute lg:w-[70%] lg:h-[100vh] lg:bottom-auto lg:rounded-none pointer-events-none',
+    ]"
   >
     <label for="description" class="w-[90%] flex flex-col text-white gap-3">
       <span class="font-semibold uppercase tracking-[2px]">Descrição</span>
@@ -115,8 +118,16 @@ const handlerSubmitExpense = async () => {
       </div>
     </label>
     <label for="date" class="w-[90%] h-[40px] flex items-center justify-evenly">
-      <span class="uppercase font-semibold tracking-[2px] text-white">Data: </span>
-      <input type="date" name="date" id="date" class="text-white tracking-[2px] font-semibold border-b-1" v-model="selectDate">
+      <span class="uppercase font-semibold tracking-[2px] text-white"
+        >Data:
+      </span>
+      <input
+        type="date"
+        name="date"
+        id="date"
+        class="text-white tracking-[2px] font-semibold border-b-1"
+        v-model="selectDate"
+      />
     </label>
     <select
       name="category"
@@ -138,5 +149,9 @@ const handlerSubmitExpense = async () => {
     </button>
     <Error :message="msgError" :visible="!!msgError" />
     <Success :message="msgSuccess" :visible="!!msgSuccess" />
+    <button class="border w-[30px] h-[30px] border-white absolute top-5 right-5 grid place-items-center" @click="stateMenu.stateMenu()">
+      <span class="w-[100%] h-0.5 block bg-white rotate-45 translate-y-[7px] origin-center "></span>
+      <span class="w-[100%] h-0.5 block bg-white -rotate-45 -translate-y-[7px] origin-center"></span>
+    </button>
   </main>
 </template>

@@ -2,20 +2,32 @@
 import Profile from "../../components/layouts/Profile.vue";
 import SectionCards from "./.components/SectionCards.vue";
 import Menu from "~/components/layouts/Menu.vue";
-import HistorySection from './.components/HistorySection.vue';
+import HistorySection from "./.components/HistorySection.vue";
+import PostExpense from "./.components/PostExpense.vue";
+import stateMenuStore from "~/store/stateMenuStore";
+import auth from "~/middleware/auth";
 
+
+
+const stateMenu = stateMenuStore();
+
+definePageMeta({
+  middleware: auth
+})
 
 </script>
 
 <template>
-  <main class="w-screen h-screen flex flex-col items-center bg-gray-200 font-poppins lg:w-[65%] lg:ml-[35%] lg:h-screen xl:w-[75%] xl:ml-[25%] xl:h-screen overflow-auto">
-    <section
-    class="w-full h-[90vh] flex flex-col items-center justify-center border overflow-auto"
+  <main class="w-screen flex flex-col items-center overflow-y-auto bg-gray-100">
+    <Menu />
+    <main
+      class="w-screen flex flex-col items-center mb-[10vh] lg:w-[70%] lg:ml-[30%]"
+      :class="stateMenu.menu ? 'bg-gray-500 blur-xl' : ''"
     >
-      <Profile class="lg:hidden" />
+      <Profile />
       <SectionCards />
       <HistorySection />
-    </section>
-    <Menu class="lg:w-[35%] xl:w-[25%] lg:h-screen h-[10vh]" />
+    </main>
+    <PostExpense />
   </main>
 </template>

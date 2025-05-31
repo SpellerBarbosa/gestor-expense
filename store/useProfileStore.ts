@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import type { IProfile } from "~/server/utils/interfaces/interfaces";
+import api from '~/server/utils/axios/api'
 
 const useProfileStore = defineStore('Profile',{
-    state:():IProfile =>({
+    state:() =>({
         _id: undefined,
         name: undefined,
         user: undefined,
@@ -12,17 +12,19 @@ const useProfileStore = defineStore('Profile',{
         isLoggedIn: (state) => !!state.user
     },
     actions:{
-        async useFetchProfile(){
+        async fetchProfile(){
             try {
-                const data: IProfile = await $fetch('/api/auth/profile');
-                
-                this._id = data._id
-                this.name = data.name
+                const response = await api.get('/auth/secure',{
+                    withCredentials: true
+                });
+                const data = await response.data.decoded;
+
+                this._id = data._id,
+                this.name = data.name,
                 this.user = data.user
             } catch (error) {
-                console.error(error)
+                console.log(error)
             }
-
         }
     }
 

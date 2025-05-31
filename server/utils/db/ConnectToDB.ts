@@ -12,8 +12,6 @@ const connectToDB = async () => {
       serverSelectionTimeoutMS: 5000,
     });
 
-    console.log('Conexão com o banco de dados bem sucedida.')
-
   } catch (error ) {
     if(error instanceof Error){
       console.error('Erro ao conectar com banco de dados: ', error.message)

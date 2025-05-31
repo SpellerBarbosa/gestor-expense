@@ -38,7 +38,7 @@ watch(
 );
 </script>
 <template>
-  <section class="w-[90%] flex flex-col overflow-hidden mt-5">
+  <section class="w-[90%] h-[350px] flex flex-col overflow-hidden mt-5">
     <h1
       class="text-2xl uppercase w-full h-[20%] text-center font-bold italic tracking-wider mb-[30px]"
     >

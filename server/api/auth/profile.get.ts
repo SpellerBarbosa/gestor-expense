@@ -6,6 +6,7 @@ export default defineEventHandler(async (event) => {
   const token = getCookie(event, "token");
   const secret = variableAmbient("SECRET");
 
+
   if (!token) {
     throw createError({
       statusCode: 400,

@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Profile from '~/components/layouts/Profile.vue';
+import stateMenuStore from '~/store/stateMenuStore';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
+const stateMenu = stateMenuStore()
 
 const goToPostExpenses = () =>{
-  router.push('/expenses')
+  stateMenu.stateMenu()
 }
 
 const goToDasboard = () =>{
@@ -13,8 +15,9 @@ const goToDasboard = () =>{
 }
 </script>
 <template>
-  <nav class="w-screen h-[10vh] bg-blue-600 fixed bottom-0 lg:flex lg:flex-col lg:items-center lg:left-0">
-    <Profile class="hidden lg:flex" />
+  <nav class="w-screen h-[10vh] bg-blue-600 fixed bottom-0 lg:w-[30%] lg:h-[100vh] lg:flex lg:flex-col lg:items-center lg:left-0 z-10">
+    <!--Menu mobile-->
+    <Profile class="hidden lg:block" />
     <ul class="w-full h-full flex items-center justify-evenly gap-2 relative text-white lg:flex-col lg:hidden">
       <li class="flex-1/2 grid place-items-center">
         <span class="material-symbols-outlined" @click="goToDasboard"> home </span>
@@ -26,6 +29,8 @@ const goToDasboard = () =>{
         <span class="material-symbols-outlined"> logout </span>
       </li>
     </ul>
+
+    <!-- menu desktop -->
     <ul class="w-[80%]  hidden lg:flex lg:flex-col justify-center items-center lg:gap-5 lg:mt-[30px] uppercase">
       <li class="w-[70%] font-semibold tracking-wider cursor-pointer" @click="goToDasboard">Inicio</li>
       <li class="w-[70%] font-semibold tracking-wider cursor-pointer" @click="goToPostExpenses">Lançar despesas</li>
