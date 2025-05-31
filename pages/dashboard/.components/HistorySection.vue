@@ -23,7 +23,7 @@ const formatDate = (date: string) => {
 <template>
   <section class="w-[90%] h-[300px] flex flex-col items-center mt-[20px]">
     <h1 class="uppercase font-semibold italic text-xl tracking-wider mb-[15px] bg-gray-100">
-      Hisotico de despesas
+      Histórico de despesas
     </h1>
 
     <table class="w-full border-collapse border-none">
