@@ -6,6 +6,7 @@ import clearMessages from "~/composables/clearMessages";
 import api from "~/server/utils/axios/api";
 import useProfileStore from "~/store/useProfileStore";
 import stateMenuStore from "~/store/stateMenuStore";
+import useExpenseStore from "~/store/useStoreExpense";
 
 const description = ref<string>("");
 const value = ref<string>("");
@@ -17,6 +18,7 @@ const userId = useProfile._id;
 const systemDate = new Date().toISOString().slice(0, 10);
 const selectDate = ref<string>(systemDate);
 const stateMenu = stateMenuStore();
+const expense = useExpenseStore();
 
 const handlerSubmitExpense = async () => {
   const formatValue = value.value.replace(",", ".");
@@ -57,6 +59,7 @@ const handlerSubmitExpense = async () => {
     });
     const data = response.data;
     msgSuccess.value = data.message;
+    expense.searchExpenses()
     clearMessages(msgSuccess);
   } catch (error: any) {
     if (error.response) {
