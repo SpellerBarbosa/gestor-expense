@@ -4,9 +4,11 @@ import Expense from "~/server/utils/schemas/expenseSchema";
 export default defineEventHandler(async (event) => {
   await connectToDB();
 
-  const { description, value, category, userId, date } = await readBody(event);
+  const { description, value, category, payment, userId, date } = await readBody(event);
 
-  if (!description || !value || !category || !userId ||!date) {
+  console.log(description, value, category, payment, userId, date)
+
+  if (!description || !value || !category ||!payment || !userId ||!date) {
     throw createError({
       statusCode: 400,
       statusMessage: "Preencha todos os campos corretamente.",
@@ -20,6 +22,7 @@ export default defineEventHandler(async (event) => {
       description: description.toLowerCase().trim(),
       value: value.trim(),
       category: category.toLowerCase().trim(),
+      payment: payment.toLowerCase().trim(),
       userId: userId,
       date: date
     });

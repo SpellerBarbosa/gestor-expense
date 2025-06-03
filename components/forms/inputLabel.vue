@@ -2,11 +2,10 @@
 const props = defineProps({
   inputType: {
     type: String,
-    default: "text",
   },
   place: {
     type: String,
-    required: true,
+
   },
   modelValue: {
     type: [String, Number],
@@ -14,11 +13,11 @@ const props = defineProps({
   },
   link: {
     type: String,
-    required: true,
+
   },
   input_name: {
     type: String,
-    required: true,
+
   },
   feedback: {
     type: String,
@@ -28,6 +27,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled:{
+    type: Boolean
+  }
 });
 
 const emit = defineEmits<{
@@ -53,6 +55,7 @@ const updateValue = (event: Event) => {
       :id="link"
       class="text-center border-b-2 text-xl outline-none focus:border-green-300 transition-all duration-500 md:text-2xl"
       :aria-describedby="visible ? `${link}-feedback`: undefined"
+      :disabled="disabled"
     />
     <p :id="`${link}-feedback`" :class="visible ? 'text-red-700 font-semibold text-sm block' : 'hidden'">
       {{ feedback }}

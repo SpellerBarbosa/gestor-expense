@@ -16,6 +16,9 @@ const expenseSchema = new Schema(
       required: true,
       min: 0,
     },
+    payment:{
+      type: String
+    },
     date:{
       type: Date
     },

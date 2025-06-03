@@ -10,8 +10,6 @@ watchEffect(() => {
 
 const expenses = computed(() => expenseStore.expenses);
 
-
-
 const formatDate = (date: string) => {
   const formatDate = date.slice(0, 10);
   const day = formatDate.split("-")[2];
@@ -22,16 +20,21 @@ const formatDate = (date: string) => {
 </script>
 <template>
   <section class="w-[90%] h-[300px] flex flex-col items-center mt-[20px]">
-    <h1 class="uppercase font-semibold italic text-xl tracking-wider mb-[15px] bg-gray-100">
+    <h1
+      class="uppercase font-semibold italic text-xl tracking-wider mb-[15px] bg-gray-100"
+    >
       Histórico de despesas
     </h1>
 
-    <table class="w-full border-collapse border-none">
+    <table class="w-full border-collapse border-none text-xs">
       <thead>
         <tr class="w-full">
-          <th class="w-1/4 uppercase text-left">Data</th>
-          <th class="w-2/4 uppercase text-left">Lançamento</th>
-          <th class="w-1/4 uppercase text-left">valor</th>
+          <th class="w-1/4 uppercase">Data</th>
+          <th class="w-1/4 uppercase">Lançamento</th>
+          <th class="w-1/4 uppercase">valor</th>
+          <th class="w-1/4">
+            <span class="material-symbols-outlined">edit</span>
+          </th>
         </tr>
       </thead>
       <tbody
@@ -44,13 +47,21 @@ const formatDate = (date: string) => {
             {{ formatDate(expense.date) }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
-            {{ expense.description }}
+            {{ expense.description }} <br> {{ expense.payment }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
             R$ {{ expense.value.toFixed(2) }}
+          </td>
+          <td>
+          <span class="material-symbols-outlined"><nuxt-link :to="`/dashboard/edit-expense/${expense._id}`">settings</nuxt-link></span>
           </td>
         </tr>
       </tbody>
     </table>
   </section>
 </template>
+<style scoped>
+.material-symbols-outlined {
+  font-size: small;
+}
+</style>

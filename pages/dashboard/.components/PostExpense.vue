@@ -11,6 +11,7 @@ import useExpenseStore from "~/store/useStoreExpense";
 const description = ref<string>("");
 const value = ref<string>("");
 const category = ref<string>("");
+const payment = ref<string>("");
 const msgError = ref<string>("");
 const msgSuccess = ref<string>("");
 const useProfile = useProfileStore();
@@ -19,6 +20,7 @@ const systemDate = new Date().toISOString().slice(0, 10);
 const selectDate = ref<string>(systemDate);
 const stateMenu = stateMenuStore();
 const expense = useExpenseStore();
+const isLoading = ref<boolean>(false);
 
 const handlerSubmitExpense = async () => {
   const formatValue = value.value.replace(",", ".");
@@ -37,6 +39,12 @@ const handlerSubmitExpense = async () => {
     return;
   }
 
+  if (!payment.value) {
+    msgError.value = "Digite o método de pagamento da despesa";
+    clearMessages(msgError);
+    return;
+  }
+
   if (!category.value) {
     msgError.value = "Escolha uma categoria";
     clearMessages(msgError);
@@ -50,18 +58,29 @@ const handlerSubmitExpense = async () => {
   }
 
   try {
+    isLoading.value = true
+
     const response = await api.post("/expense/create", {
       description: description.value.toLowerCase().trim(),
       value: realValue,
       category: category.value.toLowerCase().trim(),
+      payment: payment.value.toLowerCase().trim(),
       userId: userId,
       date: date.toISOString(),
     });
     const data = response.data;
     msgSuccess.value = data.message;
-    expense.searchExpenses()
+    description.value = "";
+    value.value = "";
+    payment.value = "";
+    category.value = "";
+    expense.searchExpenses();
     clearMessages(msgSuccess);
+    setTimeout(() => {
+      isLoading.value = false
+    }, 3500);
   } catch (error: any) {
+    isLoading.value = false
     if (error.response) {
       const status = error.response.status;
       const message = error.response.data?.message;
@@ -87,7 +106,7 @@ const handlerSubmitExpense = async () => {
   <main
     :class="[
       stateMenu.menu
-        ? 'w-[95%] h-[50vh] flex flex-col items-center justify-evenly bg-blue-800 rounded-4xl md:w-[60%] absolute bottom-0 mb-[12vh] transition-all duration-1000 opacity-100 lg:left-[30%] lg:w-[70%] lg:h-[100vh] lg:bottom-auto lg:rounded-none'
+        ? 'w-[95%] h-[70vh] flex flex-col items-center justify-evenly bg-blue-800 rounded-4xl md:w-[60%] absolute bottom-0 mb-[12vh] transition-all duration-1000 opacity-100 lg:w-[50%] lg:h-[70%] lg:bottom-auto lg:rounded-4xl'
         : 'transition-all duration-200 opacity-0 bottom-0 absolute lg:w-[70%] lg:h-[100vh] lg:bottom-auto lg:rounded-none pointer-events-none',
     ]"
   >
@@ -120,6 +139,18 @@ const handlerSubmitExpense = async () => {
         />
       </div>
     </label>
+    <label for="payment" class="flex flex-col gap-2 w-[90%]">
+      <span class="uppercase tracking-[2px] font-semibold text-white"
+        >Método pagamento</span
+      >
+      <input
+        type="text"
+        placeholder="Digite o método de pagamento"
+        id="payment"
+        class="outline-none border-b-2 border-white text-center text-lg text-white"
+        v-model="payment"
+      />
+    </label>
     <label for="date" class="w-[90%] h-[40px] flex items-center justify-evenly">
       <span class="uppercase font-semibold tracking-[2px] text-white"
         >Data:
@@ -146,15 +177,44 @@ const handlerSubmitExpense = async () => {
     </select>
     <button
       @click.prevent="handlerSubmitExpense"
-      class="uppercase w-[120px] h-[50px] rounded-xl bg-[#ffffff] font-semibold tracking-wider border-none"
+      class="uppercase w-[120px] h-[50px] rounded-xl bg-[#ffffff] font-semibold tracking-wider border-none flex items-center justify-center"
+      :disabled="isLoading"
     >
-      salvar
+      {{ isLoading ? "Salvando" : "salvar" }}
+      <svg
+        class="w-4 h-4 animate-spin ml-2"
+        :class="isLoading ? 'block':'hidden'"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          class="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+        />
+        <path
+          class="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+        />
+      </svg>
     </button>
     <Error :message="msgError" :visible="!!msgError" />
     <Success :message="msgSuccess" :visible="!!msgSuccess" />
-    <button class="border w-[30px] h-[30px] border-white absolute top-5 right-5 grid place-items-center" @click="stateMenu.stateMenu()">
-      <span class="w-[100%] h-0.5 block bg-white rotate-45 translate-y-[7px] origin-center "></span>
-      <span class="w-[100%] h-0.5 block bg-white -rotate-45 -translate-y-[7px] origin-center"></span>
+    <button
+      class="border w-[30px] h-[30px] border-white absolute top-5 right-5 grid place-items-center"
+      @click="stateMenu.stateMenu()"
+    >
+      <span
+        class="w-[100%] h-0.5 block bg-white rotate-45 translate-y-[7px] origin-center"
+      ></span>
+      <span
+        class="w-[100%] h-0.5 block bg-white -rotate-45 -translate-y-[7px] origin-center"
+      ></span>
     </button>
   </main>
 </template>

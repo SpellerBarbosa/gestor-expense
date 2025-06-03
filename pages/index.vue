@@ -12,6 +12,7 @@ const user = ref<string>("");
 const password = ref<string>("");
 const msgError = ref<string>("");
 const msgSuccess = ref<string>("");
+const isLoading = ref<boolean>(false);
 const useProfile = useProfileStore();
 const { sendRedirect } = useSendRedirect();
 
@@ -23,6 +24,8 @@ const handleSubmitLogin = async () => {
   }
 
   try {
+    isLoading.value = true
+
     const response = await api.post("/auth/login", {
       user: user.value.trim().toLowerCase(),
       password: password.value.trim(),
@@ -32,9 +35,11 @@ const handleSubmitLogin = async () => {
     msgSuccess.value = data.message;
     user.value = "";
     password.value = "";
-    useProfile.fetchProfile()
+    useProfile.fetchProfile();
     sendRedirect("/dashboard");
   } catch (error: any) {
+    isLoading.value = false
+
     if (error.response) {
       const status = error.response.status;
       const message = error.response.data?.message || error.message;
@@ -92,9 +97,32 @@ const handleSubmitLogin = async () => {
           input-type="password"
         />
         <button
-          class="w-[120px] h-[50px] bg-white rounded-2xl text-blue-700 font-bold uppercase tracking-wider md:w-[180px] md:h-[70px] md:rounded-3xl md:text-2xl"
+          class="w-[180px] h-[50px] bg-white rounded-2xl text-blue-700 font-bold uppercase tracking-wider md:w-[200px] md:h-[70px] md:rounded-3xl md:text-2xl flex items-center justify-center"
+          :disabled="isLoading"
         >
-          Entrar
+          {{ isLoading ? "Entrando" : "Entrar" }}
+          <svg
+            class="w-6 h-6 animate-spin ml-3"
+            :class="isLoading ? 'block':'hidden'"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            />
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            />
+          </svg>
+        
         </button>
       </form>
       <p

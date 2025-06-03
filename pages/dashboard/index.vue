@@ -18,16 +18,16 @@ definePageMeta({
 </script>
 
 <template>
-  <main class="w-screen flex flex-col items-center overflow-y-auto bg-gray-100">
+  <main class="w-screen h-screen flex flex-col items-center overflow-y-auto bg-gray-100">
     <Menu />
     <main
-      class="w-screen flex flex-col items-center mb-[10vh] lg:w-[70%] lg:ml-[30%]"
+      class="w-screen flex flex-col items-center mb-[10vh] lg:w-[85%] lg:ml-[15%] bg-gray-100"
       :class="stateMenu.menu ? 'bg-gray-500 blur-xl' : ''"
     >
-      <Profile />
-      <SectionCards />
-      <HistorySection />
+      <Profile class="lg:hidden" />
+      <SectionCards/>
+      <HistorySection/>
     </main>
-    <PostExpense />
+    <PostExpense class="mt-[10%] -translate-y-[10%]"/>
   </main>
 </template>

@@ -38,7 +38,7 @@ watch(
 );
 </script>
 <template>
-  <section class="w-[90%] h-[350px] flex flex-col overflow-hidden mt-5">
+  <section class="w-[90%] h-[350px] flex flex-col overflow-hidden mt-5 lg:h-[400px]">
     <h1
       class="text-2xl uppercase w-full h-[20%] text-center font-bold italic tracking-wider mb-[30px]"
     >
@@ -46,37 +46,45 @@ watch(
     </h1>
     <div
       id="container-dates"
-      class="w-full uppercase mb-[20px] flex justify-evenly items-center"
+      class="w-full uppercase mb-[20px] flex justify-evenly items-center lg:justify-start gap-10"
     >
       <label for="date-initial" class="flex flex-col">
-        <span>Data inicial: </span>
-        <input type="date" id="date-initial" v-model="dateInitial" />
+        <span>De: </span>
+        <input type="date" id="date-initial" v-model="dateInitial" class=""/>
       </label>
-      <label for="date-finally" class="flex flex-col">
-        <span>data final: </span>
+      <label for="date-finally" class="flex  flex-col">
+        <span>até: </span>
         <input type="date" id="date-finally" v-model="dateFinally" />
       </label>
     </div>
     <section class="flex flex-wrap gap-2.5">
       <Card
         category="Cartões"
+        icon="credit_card"
+        color="bg-blue-200 text-blue-500 border-none shadow-md shadow-blue-200"
         :fullValue="useExpense.valueCard"
-        class="bg-blue-400 text-white"
+        class="bg-gray-50"
       />
       <Card
         category="Alimentação"
+        icon="restaurant"
+        color="bg-green-200 text-green-600 border-none shadow-md shadow-green-200 text-[8px]"
         :fullValue="useExpense.valueFood"
-        class="bg-green-300"
+        class="bg-gray-50"
       />
       <Card
         category="Casa"
+        icon="house"
+        color="bg-purple-200 border-none text-purple-600 shadow-md shadow-purple-200"
         :fullValue="useExpense.valueHome"
-        class="bg-yellow-300"
+        class="bg-gray-50"
       />
       <Card
         category="Outras"
+        icon="storefront"
+        color="bg-yellow-100 border-none text-yellow-600 shadow-md shadow-yellow-200"
         :fullValue="useExpense.valueOthers"
-        class="bg-gray-300"
+        class="bg-gray-50"
       />
     </section>
   </section>

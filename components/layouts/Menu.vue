@@ -30,10 +30,10 @@ const logout = async () => {
 </script>
 <template>
   <nav
-    class="w-screen h-[10vh] bg-blue-600 fixed bottom-0 lg:w-[30%] lg:h-[100vh] lg:flex lg:flex-col lg:items-center lg:left-0 z-10"
+  class="w-screen h-[10vh] bg-blue-600 fixed bottom-0 lg:w-[15%] lg:h-[100vh] lg:flex lg:flex-col lg:items-center lg:left-0 z-10 lg:bg-gray-50"
   >
-    <!--Menu mobile-->
-    <Profile class="hidden lg:block" />
+  <!--Menu mobile-->
+  <Profile class="hidden lg:block" />
     <ul
       class="w-full h-full flex items-center justify-evenly gap-2 relative text-white lg:flex-col lg:hidden"
     >
@@ -56,21 +56,26 @@ const logout = async () => {
 
     <!-- menu desktop -->
     <ul
-      class="w-[80%] hidden lg:flex lg:flex-col justify-center items-center lg:gap-5 lg:mt-[30px] uppercase"
+      class="w-[80%] hidden lg:flex lg:flex-col justify-center items-center lg:gap-5 uppercase lg:border-gray-300 lg:border-1 lg:w-full lg:h-full lg:justify-start"
     >
       <li
-        class="w-[70%] font-semibold tracking-wider cursor-pointer"
+        class="w-[90%] h-[50px] font-semibold tracking-wider cursor-pointer  lg:flex lg:items-center lg:gap-7"
         @click="goToDasboard"
       >
+      <span class="material-symbols-outlined" > home </span>
         Inicio
       </li>
       <li
-        class="w-[70%] font-semibold tracking-wider cursor-pointer"
+        class="w-[90%] h-[50px] font-semibold tracking-wider cursor-pointer  lg:flex lg:items-center lg:gap-7"
         @click="goToPostExpenses"
       >
+      <span class="material-symbols-outlined" > list_alt_add </span>
         Lançar despesas
       </li>
-      <li class="w-[70%] font-semibold tracking-wider cursor-pointer" @click="logout">sair</li>
+      <li class="w-full h-[50px] font-semibold tracking-wider cursor-pointer lg:absolute lg:bottom-0 lg:flex lg:items-center lg:gap-7 lg:border lg:text-red-400 lg:border-gray-300" @click="logout">
+      <span class="material-symbols-outlined" > logout </span>
+        sair
+      </li>
     </ul>
   </nav>
 </template>
@@ -78,5 +83,13 @@ const logout = async () => {
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   font-size: 40px;
+}
+
+@media screen and (min-width: 1280px) {
+  .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  font-size: 20px;
+
+}
 }
 </style>
