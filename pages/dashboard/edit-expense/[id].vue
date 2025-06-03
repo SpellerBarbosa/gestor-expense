@@ -85,7 +85,7 @@ const handleDeleteExpense = async () => {
 </script>
 <template>
   <main
-    class="w-screen h-screen flex flex-col items-center bg-gray-200 lg:w-[calc(100%-15%)] ml-[15%] lg:justify-center relative"
+    class="w-screen h-screen flex flex-col items-center bg-gray-200 lg:w-[calc(100%-15%)] lg:ml-[15%] lg:justify-center relative"
   >
     <Profile class="lg:hidden" />
     <Menu />
