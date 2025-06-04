@@ -78,7 +78,7 @@ const handlerSubmitExpense = async () => {
     clearMessages(msgSuccess);
     setTimeout(() => {
       isLoading.value = false
-    }, 3500);
+    }, 2500);
   } catch (error: any) {
     isLoading.value = false
     if (error.response) {
@@ -143,13 +143,13 @@ const handlerSubmitExpense = async () => {
       <span class="uppercase tracking-[2px] font-semibold text-white"
         >Método pagamento</span
       >
-      <input
-        type="text"
-        placeholder="Digite o método de pagamento"
-        id="payment"
-        class="outline-none border-b-2 border-white text-center text-lg text-white"
-        v-model="payment"
-      />
+          <select name="payment" id="payment" v-model="payment" class="outline-none border-b-2 border-white text-center text-lg text-white uppercase tracking-wider font-semibold bg-blue-800">
+            <option value="" disabled selected>escolha uma opção</option>
+            <option value="card">Cartão</option>
+            <option value="money">Dinheiro</option>
+            <option value="pix">pix</option>
+            <option value="cheque">cheque</option>
+          </select>
     </label>
     <label for="date" class="w-[90%] h-[40px] flex items-center justify-evenly">
       <span class="uppercase font-semibold tracking-[2px] text-white"

@@ -11,7 +11,7 @@ const goToPostExpenses = () => {
   stateMenu.stateMenu();
 };
 
-const goToDasboard = () => {
+const goToDashboard = () => {
   router.push("/dashboard");
 };
 
@@ -38,7 +38,7 @@ const logout = async () => {
       class="w-full h-full flex items-center justify-evenly gap-2 relative text-white lg:flex-col lg:hidden"
     >
       <li class="flex-1/2 grid place-items-center">
-        <span class="material-symbols-outlined" @click="goToDasboard">
+        <span class="material-symbols-outlined" @click="goToDashboard">
           home
         </span>
       </li>
@@ -60,7 +60,7 @@ const logout = async () => {
     >
       <li
         class="w-[90%] h-[50px] font-semibold tracking-wider cursor-pointer  lg:flex lg:items-center lg:gap-7"
-        @click="goToDasboard"
+        @click="goToDashboard"
       >
       <span class="material-symbols-outlined" > home </span>
         Inicio

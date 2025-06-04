@@ -3,19 +3,23 @@ import useProfileStore from "~/store/useProfileStore";
 
 const useProfile = useProfileStore();
 const name = useProfile.name;
-
 </script>
 
 <template>
   <section
     class="w-[95%] h-[20vh] mt-[20px] bg-blue-600 rounded-3xl grid place-items-center lg:bg-[#ffffff3b] lg:w-full lg:h-[30vh] lg:flex lg:flex-col lg:items-center lg:justify-evenly lg:border-1 lg:border-gray-300 lg:mt-auto lg:rounded-none"
   >
-  <div
-  class="w-[90%] h-full grid grid-cols-3 grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
-  >
-  <figure class="col-start-1 row-start-1 row-span-2 grid place-items-center  lg:w-full lg:flex lg:items-center lg:justify-center">
-    <img src="~/assets/img/profile.png" alt="icon de imagem vazia">
-  </figure>
+    <div
+      class="w-[90%] h-full grid grid-cols-3 grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
+    >
+      <figure
+        class="col-start-1 row-start-1 row-span-2 grid place-items-center lg:w-full lg:flex lg:items-center lg:justify-center relative"
+      >
+        <img src="~/assets/img/profile.png" alt="icon de imagem vazia"/>
+        <button class="bg-gray-900 absolute -bottom-1 rounded-2xl w-[100px] h-[20px]  hidden">
+          <span class="material-symbols-outlined"> add_photo_alternate </span>
+        </button>
+      </figure>
       <p
         class="col-start-2 col-span-2 grid place-items-center capitalize font-semibold tracking-wider text-white lg:text-black"
       >
@@ -29,3 +33,9 @@ const name = useProfile.name;
     </div>
   </section>
 </template>
+<style scoped>
+.material-symbols-outlined{
+  font-size: 14px;
+  color: white;
+}
+</style>
