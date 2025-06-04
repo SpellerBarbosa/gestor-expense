@@ -1,15 +1,47 @@
 <script setup lang="ts">
-useSeoMeta({
-  ogImage:'/despesas.png'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+
+const showRotateWarning = ref(false)
+
+const checkOrientation = () => {
+  const isLandscape = window.matchMedia('(orientation: landscape)').matches
+  const isMobile = /Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)
+
+  showRotateWarning.value = isMobile && isLandscape
+}
+
+onMounted(() => {
+  checkOrientation()
+  window.addEventListener('resize', checkOrientation)
+  window.addEventListener('orientationchange', checkOrientation)
 })
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkOrientation)
+  window.removeEventListener('orientationchange', checkOrientation)
+})
+
+useSeoMeta({
+  ogImage: "/despesas.png",
+});
 </script>
 <template>
   <div>
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div
+      v-if="showRotateWarning"
+      class="fixed inset-0 z-[9999] bg-white text-black text-center pt-[40vh] text-lg"
+    >
+      Por favor, gire seu dispositivo para o modo retrato.
+    </div>
+
+    <div v-else>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </div>
 </template>
+
 <style>
 .page-enter-active,
 .page-leave-active {
