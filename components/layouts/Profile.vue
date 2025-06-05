@@ -7,35 +7,32 @@ const useProfile = useProfileStore();
 const name = useProfile.name;
 const userId = useProfile._id;
 const inputFile = ref<HTMLInputElement | null>(null);
-const image = useProfile.imageProfile;
+const image = ref<string>("");
 
 function handleClickImage() {
   inputFile.value?.click();
 }
 
-
 async function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
 
-  if(!file){
-    console.error("Arquivo nao encontrado ou  invalido")
-    return
+  if (!file) {
+    console.error("Arquivo nao encontrado ou  invalido");
+    return;
   }
 
   if (file && file.type.startsWith("image")) {
     const reader = new FileReader();
 
-  
     const formData = new FormData();
     formData.append("image", file);
     formData.append("userId", String(userId));
-   
+
     try {
       const response = await api.post("/user/upload", formData);
-
       const data = response.data.message;
-      console.error(data);
+      console.log(data)
     } catch (error: any) {
       if (error.response) {
         const status = error.response.status;
@@ -53,11 +50,24 @@ async function handleFileChange(event: Event) {
       } else {
         console.error(error);
       }
+    } finally {
     }
 
     reader.readAsDataURL(file);
   }
 }
+
+watchEffect(async()=>{
+  try {
+    const response = await api.post("/user/image",{
+      id: userId
+    });
+    const data = response.data.image.image
+    image.value = data
+  } catch (error) {
+    console.error(error)
+  }
+})
 </script>
 
 <template>
@@ -68,7 +78,7 @@ async function handleFileChange(event: Event) {
       class="w-[90%] h-full grid grid-cols-3 place-items-center grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
     >
       <figure
-        class="w-[150px] h-[150px] col-start-1 row-start-1 row-span-2 grid place-items-center rounded-full relative overflow-hidden shadow-md shadow-black"
+        class="w-[100px] h-[100px] col-start-1 row-start-1 row-span-2 grid place-items-center rounded-full relative overflow-hidden shadow-md shadow-black xl:w-[200px] xl:h-[200px]"
       >
         <img
           :src="image || imagemDefault"
