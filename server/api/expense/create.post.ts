@@ -6,7 +6,6 @@ export default defineEventHandler(async (event) => {
 
   const { description, value, category, payment, userId, date } = await readBody(event);
 
-  console.log(description, value, category, payment, userId, date)
 
   if (!description || !value || !category ||!payment || !userId ||!date) {
     throw createError({

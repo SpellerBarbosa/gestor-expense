@@ -6,6 +6,7 @@ const useProfileStore = defineStore('Profile',{
         _id: undefined,
         name: undefined,
         user: undefined,
+        imageProfile: undefined
 
     }),
     getters:{
@@ -21,9 +22,10 @@ const useProfileStore = defineStore('Profile',{
 
                 this._id = data._id,
                 this.name = data.name,
-                this.user = data.user
+                this.user = data.user,
+                this.imageProfile = data.imageProfile
             } catch (error) {
-                console.log(error)
+                console.error(error)
             }
         }
     }

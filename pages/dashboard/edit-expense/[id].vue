@@ -39,7 +39,6 @@ onMounted(async () => {
     expense.value.value = data.expense.value.toFixed(2);
     expense.value.category = data.expense.category;
 
-    console.log(expense.value.category);
   } catch (error) {}
 });
 
@@ -119,7 +118,6 @@ const handleUpdateExpense = async () => {
 
     const data = response.data.message;
     msgSuccess.value = data;
-    console.log(data);
     clearMessages(msgSuccess);
     sendRedirect("/dashboard");
   } catch (error: any) {

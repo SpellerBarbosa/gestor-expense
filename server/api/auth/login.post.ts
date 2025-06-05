@@ -49,6 +49,7 @@ export default defineEventHandler(async (event) => {
         _id: userExist._id.toString(),
         name: userExist.name,
         user: userExist.user,
+        imageProfile: userExist.image
       },
       SECRET
     );

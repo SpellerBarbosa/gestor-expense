@@ -1,8 +1,63 @@
 <script setup lang="ts">
 import useProfileStore from "~/store/useProfileStore";
+import api from "~/server/utils/axios/api";
+import imagemDefault from "~/assets/img/profile.png";
 
 const useProfile = useProfileStore();
 const name = useProfile.name;
+const userId = useProfile._id;
+const inputFile = ref<HTMLInputElement | null>(null);
+const image = useProfile.imageProfile;
+
+function handleClickImage() {
+  inputFile.value?.click();
+}
+
+
+async function handleFileChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
+
+  if(!file){
+    console.error("Arquivo nao encontrado ou  invalido")
+    return
+  }
+
+  if (file && file.type.startsWith("image")) {
+    const reader = new FileReader();
+
+  
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("userId", String(userId));
+   
+    try {
+      const response = await api.post("/user/upload", formData);
+
+      const data = response.data.message;
+      console.error(data);
+    } catch (error: any) {
+      if (error.response) {
+        const status = error.response.status;
+        const message = error.response.data?.message;
+
+        if (status >= 400 && status < 500) {
+          console.error(message);
+          return;
+        }
+
+        if (status >= 500) {
+          console.error(message);
+          return;
+        }
+      } else {
+        console.error(error);
+      }
+    }
+
+    reader.readAsDataURL(file);
+  }
+}
 </script>
 
 <template>
@@ -10,14 +65,29 @@ const name = useProfile.name;
     class="w-[95%] h-[20vh] mt-[20px] bg-blue-600 rounded-3xl grid place-items-center lg:bg-[#ffffff3b] lg:w-full lg:h-[30vh] lg:flex lg:flex-col lg:items-center lg:justify-evenly lg:border-1 lg:border-gray-300 lg:mt-auto lg:rounded-none"
   >
     <div
-      class="w-[90%] h-full grid grid-cols-3 grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
+      class="w-[90%] h-full grid grid-cols-3 place-items-center grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
     >
       <figure
-        class="col-start-1 row-start-1 row-span-2 grid place-items-center lg:w-full lg:flex lg:items-center lg:justify-center relative"
+        class="w-[150px] h-[150px] col-start-1 row-start-1 row-span-2 grid place-items-center rounded-full relative overflow-hidden shadow-md shadow-black"
       >
-        <img src="~/assets/img/profile.png" alt="icon de imagem vazia"/>
-        <button class="bg-gray-900 absolute -bottom-1 rounded-2xl w-[100px] h-[20px]  hidden">
-          <span class="material-symbols-outlined"> add_photo_alternate </span>
+        <img
+          :src="image || imagemDefault"
+          alt="icon de imagem vazia"
+          ref="selectImage"
+          class="w-full h-full"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          class="hidden"
+          ref="inputFile"
+          @change="handleFileChange"
+        />
+        <button
+          class="bg-gray-700 absolute w-full h-[25px] bottom-0 flex items-center justify-center"
+          @click="handleClickImage"
+        >
+          <span class="material-symbols-outlined"> add_a_photo </span>
         </button>
       </figure>
       <p
@@ -34,8 +104,8 @@ const name = useProfile.name;
   </section>
 </template>
 <style scoped>
-.material-symbols-outlined{
-  font-size: 14px;
+.material-symbols-outlined {
+  font-size: 20px;
   color: white;
 }
 </style>

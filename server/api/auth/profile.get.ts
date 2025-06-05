@@ -21,7 +21,8 @@ export default defineEventHandler(async (event) => {
       !decoded ||
       typeof decoded !== "object" ||
       !decoded.user ||
-      !decoded.name
+      !decoded.name||
+      !decoded.image
     ) {
       throw createError({
         statusCode: 401,
@@ -33,6 +34,7 @@ export default defineEventHandler(async (event) => {
       _id: decoded._id,
       user: decoded.user,
       name: decoded.name,
+      imageProfile: decoded.image
     };
   } catch (error) {
     console.error("Error ao verificar token: ", error);
