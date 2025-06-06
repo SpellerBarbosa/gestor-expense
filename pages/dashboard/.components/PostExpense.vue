@@ -170,9 +170,10 @@ const handlerSubmitExpense = async () => {
       v-model="category"
     >
       <option value="" disabled selected>Escolha a categoria</option>
-      <option value="card">Cartão</option>
       <option value="food">Alimentação</option>
       <option value="home">Casa</option>
+      <option value="financing-and-consortium">Financiamento / Consorcio</option>
+      <option value="leisure">Lazer</option>
       <option value="other">Outras</option>
     </select>
     <button

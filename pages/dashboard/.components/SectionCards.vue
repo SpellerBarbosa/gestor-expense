@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import Card from "./Card.vue";
-import { watchEffect } from "vue";
 import useProfileStore from "~/store/useProfileStore";
 import useExpenseStore from "~/store/useStoreExpense";
-import clearMessages from "~/composables/clearMessages";
-import type { IExpense } from "~/server/utils/interfaces/interfaces";
-import api from "~/server/utils/axios/api";
 
 const useProfile = useProfileStore();
 const userId = useProfile._id;
@@ -38,7 +34,9 @@ watch(
 );
 </script>
 <template>
-  <section class="w-[90%] h-[350px] flex flex-col overflow-hidden mt-5 lg:h-[400px]">
+  <section
+    class="w-[90%] h-[350px] flex flex-col overflow-hidden mt-5 lg:h-[400px]"
+  >
     <h1
       class="text-2xl uppercase w-full h-[20%] text-center font-bold italic tracking-wider mb-[30px]"
     >
@@ -50,40 +48,52 @@ watch(
     >
       <label for="date-initial" class="flex flex-col">
         <span>De: </span>
-        <input type="date" id="date-initial" v-model="dateInitial" class=""/>
+        <input type="date" id="date-initial" v-model="dateInitial" class="" />
       </label>
-      <label for="date-finally" class="flex  flex-col">
+      <label for="date-finally" class="flex flex-col">
         <span>até: </span>
         <input type="date" id="date-finally" v-model="dateFinally" />
       </label>
     </div>
-    <section class="flex flex-wrap gap-2.5">
+    <section class="flex flex-wrap gap-2.5 mb-[50px]">
       <Card
-        category="Cartões"
-        icon="credit_card"
-        color="bg-blue-200 text-blue-500 border-none shadow-md shadow-blue-200"
-        :fullValue="useExpense.valueCard"
+        category="Consorcio & Financiamentos"
+        icon="account_balance"
+        iconStyle="rounded-full p-2 bg-blue-200 shadow-md lg:rounded-none lg:p-0 lg:shadow-none lg:bg-transparent"
+        color="lg:bg-blue-200 text-blue-500 border-none lg:shadow-md shadow-blue-200"
+        :fullValue="useExpense.valueFinancingAndConsortium"
         class="bg-gray-50"
       />
       <Card
         category="Alimentação"
         icon="restaurant"
-        color="bg-green-200 text-green-600 border-none shadow-md shadow-green-200 text-[8px]"
+        iconStyle="rounded-full p-2 bg-green-200 shadow-md lg:rounded-none lg:p-0 lg:shadow-none lg:bg-transparent"
+        color="lg:bg-green-200 text-green-600 border-none lg:shadow-md shadow-green-200 text-[8px]"
         :fullValue="useExpense.valueFood"
         class="bg-gray-50"
       />
       <Card
         category="Casa"
         icon="house"
-        color="bg-purple-200 border-none text-purple-600 shadow-md shadow-purple-200"
+        iconStyle="rounded-full p-2 bg-purple-200 shadow-md lg:rounded-none lg:p-0 lg:shadow-none lg:bg-transparent"
+        color="lg:bg-purple-200 border-none text-purple-600 lg:shadow-md shadow-purple-200"
         :fullValue="useExpense.valueHome"
         class="bg-gray-50"
       />
       <Card
         category="Outras"
         icon="storefront"
-        color="bg-yellow-100 border-none text-yellow-600 shadow-md shadow-yellow-200"
+        iconStyle="rounded-full p-2 bg-yellow-200 shadow-md lg:rounded-none lg:p-0 lg:shadow-none lg:bg-transparent"
+        color="lg:bg-yellow-100 border-none text-yellow-600 lg:shadow-md shadow-yellow-200"
         :fullValue="useExpense.valueOthers"
+        class="bg-gray-50"
+      />
+      <Card
+        category="Lazer"
+        icon="beach_access"
+        iconStyle="rounded-full p-2 bg-red-200 lg:rounded-none lg:p-0 lg:shadow-none lg:bg-transparent"
+        color="lg:bg-red-200 border-none text-red-500 text-shadow-lg lg:shadow-md shadow-red-200"
+        :fullValue="useExpense.valueLeisure"
         class="bg-gray-50"
       />
     </section>

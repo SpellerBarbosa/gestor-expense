@@ -7,10 +7,12 @@ const useExpenseStore = defineStore("Expense", {
     dateFinally: undefined as string | undefined,
     userId: undefined as string | undefined,
     expenses: [] as any[],
-    valueCard: "0" as string,
+    valueFinancingAndConsortium: "0" as string,
     valueHome: "0" as string,
     valueFood: "0" as string,
     valueOthers: "0" as string,
+    valueLeisure: "0" as string
+
   }),
   actions: {
     async searchExpenses() {
@@ -31,9 +33,10 @@ const useExpenseStore = defineStore("Expense", {
             .toFixed(2);
         };
 
-        this.valueCard = submitCategory("card");
+        this.valueFinancingAndConsortium = submitCategory("financing-and-consortium");
         this.valueHome = submitCategory("home");
         this.valueFood = submitCategory("food");
+        this.valueLeisure = submitCategory("leisure");
         this.valueOthers = submitCategory("other");
       } catch (error: any) {
         if (error.response) {

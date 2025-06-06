@@ -1,11 +1,16 @@
- const formatCategory = (category: Ref<any>) =>{
-    if(category.value === 'card'){
-        return 'cartão'
-    }else if(category.value === 'food' || category.value === "FOOD"){
-        return 'Alimentação'
-    }else if(category.value === 'home'){
-        return 'casa'
-    }else{
+ const formatCategory = (payment: string) =>{
+   
+
+    if(payment === 'card'){
+        return 'pago com Cartão'
+    }else if(payment === 'pix'){
+        return 'pago com Pix'
+    }else if(payment === 'money'){
+        return 'pago com Dinheiro'
+    }else if(payment === "cheque"){
+        return 'pago com Cheque'
+    }
+    else{
         return 'outros'
     }
 }

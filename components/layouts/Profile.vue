@@ -29,6 +29,12 @@ async function handleFileChange(event: Event) {
     formData.append("image", file);
     formData.append("userId", String(userId));
 
+    reader.onload = () =>{
+      image.value = reader.result  as string
+    }
+    
+    reader.readAsDataURL(file);
+
     try {
       const response = await api.post("/user/upload", formData);
       const data = response.data.message;
@@ -53,17 +59,16 @@ async function handleFileChange(event: Event) {
     } finally {
     }
 
-    reader.readAsDataURL(file);
   }
 }
 
-watchEffect(async()=>{
+onMounted(async()=>{
   try {
     const response = await api.post("/user/image",{
       id: userId
     });
     const data = response.data.image.image
-    image.value = data
+    image.value = `${data}?t=${Date.now()}`;
   } catch (error) {
     console.error(error)
   }
@@ -78,7 +83,7 @@ watchEffect(async()=>{
       class="w-[90%] h-full grid grid-cols-3 place-items-center grid-rows-2 lg:flex lg:flex-col lg:justify-evenly"
     >
       <figure
-        class="w-[100px] h-[100px] col-start-1 row-start-1 row-span-2 grid place-items-center rounded-full relative overflow-hidden shadow-md shadow-black xl:w-[200px] xl:h-[200px]"
+        class="w-[100px] h-[100px] col-start-1 row-start-1 row-span-2 grid place-items-center rounded-full relative overflow-hidden shadow-md shadow-black xl:w-[150px] xl:h-[150px]"
       >
         <img
           :src="image || imagemDefault"

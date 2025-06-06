@@ -25,7 +25,7 @@ definePageMeta({
       :class="stateMenu.menu ? 'bg-gray-500 blur-xl' : ''"
     >
       <Profile class="lg:hidden" />
-      <SectionCards/>
+      <SectionCards class="h-auto "/>
       <HistorySection/>
     </main>
     <PostExpense class="mt-[10%] -translate-y-[10%]"/>

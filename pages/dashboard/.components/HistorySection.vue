@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import useExpenseStore from "~/store/useStoreExpense";
 const expenseStore = useExpenseStore();
+import { formatCategory } from "#imports";
 
 watchEffect(() => {
   if (!expenseStore.expenses) {
@@ -19,7 +20,7 @@ const formatDate = (date: string) => {
 };
 </script>
 <template>
-  <section class="w-[90%] h-[300px] flex flex-col items-center mt-[20px]">
+  <section class="w-[90%] h-[400px] flex flex-col items-center mt-[20px]  mb-[30px] overflow-y-auto">
     <h1
       class="uppercase font-semibold italic text-xl tracking-wider mb-[15px] bg-gray-100"
     >
@@ -47,7 +48,7 @@ const formatDate = (date: string) => {
             {{ formatDate(expense.date) }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
-            {{ expense.description }} <br> {{ expense.payment }}
+            {{ expense.description }} <br> {{ formatCategory(expense.payment) }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
             R$ {{ expense.value.toFixed(2) }}
