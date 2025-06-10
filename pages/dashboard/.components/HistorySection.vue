@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useExpenseStore from "~/store/useStoreExpense";
 const expenseStore = useExpenseStore();
-import { formatCategory } from "#imports";
+import { formatCategory, formatPayment, formateValue } from "#imports";
 
 watchEffect(() => {
   if (!expenseStore.expenses) {
@@ -48,10 +48,10 @@ const formatDate = (date: string) => {
             {{ formatDate(expense.date) }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
-            {{ expense.description }} <br> {{ formatCategory(expense.payment) }}
+            {{ expense.description }} <br> {{ formatPayment(expense.payment) }}
           </td>
           <td class="py-2 whitespace-nowrap overflow-hidden text-ellipsis">
-            R$ {{ expense.value.toFixed(2) }}
+            R$ {{ formateValue(expense.value) }}
           </td>
           <td>
           <span class="material-symbols-outlined"><nuxt-link :to="`/dashboard/edit-expense/${expense._id}`">settings</nuxt-link></span>
