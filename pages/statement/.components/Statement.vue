@@ -62,7 +62,7 @@ const generetePDF = () =>{
 
 </script>
 <template>
-  <section class="w-screen h-[80vh] lg:h-[100vh]">
+  <section class="w-screen h-[80vh] lg:h-[100vh] mb-[10vh] overflow-auto">
 
     <h1 class="w-[100%] h-20 text-center text-4xl uppercase mt-[25px] font-bold tracking-wider text-shadow-2xs italic font-poppins mb-[25px]">Relatorio de despesas</h1>
 
@@ -84,7 +84,7 @@ const generetePDF = () =>{
           <th class="w-1/5">valor</th>
           <th class="w-1/5">PG</th>
           <th class="w-1/5">
-            <select name="filter" id="filter" v-model="category" >
+            <select name="filter" id="filter" v-model="category" class="w-1/5" >
               <option value="" selected>Filtrar</option>
               <option :value="expense.category" v-for="(expense, index) in expenses" :key="index">{{ formatCategory(expense.category) }}</option>
             </select>
@@ -101,7 +101,7 @@ const generetePDF = () =>{
         </tr>
       </tbody>
     </table>
-    <button @click="generetePDF" class=" bg-blue-500 text-white font-semibold px-4 py-2 rounded ml-[50%] -translate-x-[50%] mt-[20px]">
+    <button @click="generetePDF" class=" bg-blue-500 text-white font-semibold px-4 py-2 rounded ml-[50%] -translate-x-[50%] mt-[20px] mb-[20px]">
       Baixar PDF
     </button>
   </section>
