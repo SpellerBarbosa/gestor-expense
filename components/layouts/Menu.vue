@@ -55,10 +55,10 @@ const goToStatement = () => {
           lançar<br />despesas
         </p>
       </li>
-      <!-- <li class="flex-1/2 grid place-items-center hidden pointer-events-none opacity-0" @click="goToStatement">
+      <li class="flex-1/2 grid place-items-center" @click="goToStatement">
         <span class="material-symbols-outlined"> receipt_long </span>
         <p class="uppercase font-semibold tracking-wider">extrato</p>
-      </li> -->
+      </li>
       <li class="flex-1/2 grid place-items-center" @click="logout">
         <span class="material-symbols-outlined"> logout </span>
         <p class="uppercase font-semibold tracking-wider">sair</p>
@@ -84,7 +84,7 @@ const goToStatement = () => {
         Lançar despesas
       </li>
       <li
-        class="w-[90%] h-[50px] font-semibold tracking-wider cursor-pointer lg:flex lg:items-center lg:gap-7 pointer-events-none opacity-0"
+        class="w-[90%] h-[50px] font-semibold tracking-wider cursor-pointer lg:flex lg:items-center lg:gap-7"
         @click="goToStatement"
       >
         <span class="material-symbols-outlined"> receipt_long </span>

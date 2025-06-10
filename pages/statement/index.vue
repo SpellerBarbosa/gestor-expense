@@ -6,8 +6,8 @@ import Statement from './.components/Statement.vue';
 
 <template>
     <main class="w-screen h-screen flex flex-col items-center">
-        <Profile />
+        <Profile class="lg:hidden" />
         <Menu />
-        <Statement />
+        <Statement  class="lg:w-[85%] ml-[15%]"/>
     </main>
 </template>
