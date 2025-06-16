@@ -41,13 +41,13 @@ const goToStatement = () => {
     <ul
       class="w-full h-full flex items-center justify-evenly gap-2 relative text-white lg:flex-col lg:hidden"
     >
-      <li class="flex-1/2 grid place-items-center">
+      <li class="flex-1/2 grid place-items-center cursor-pointer">
         <span class="material-symbols-outlined" @click="goToDashboard">
           home
         </span>
         <p class="uppercase font-semibold tracking-wider">Inicio</p>
       </li>
-      <li class="flex-1/3 grid place-items-center bg-blue-600 rounded-2xl">
+      <li class="flex-1/3 grid place-items-center bg-blue-600 rounded-2xl cursor-pointer">
         <span class="material-symbols-outlined" @click="goToPostExpenses">
           add_circle
         </span>
@@ -55,11 +55,11 @@ const goToStatement = () => {
           lançar<br />despesas
         </p>
       </li>
-      <li class="flex-1/2 grid place-items-center" @click="goToStatement">
+      <li class="flex-1/2 grid place-items-center cursor-pointer" @click="goToStatement">
         <span class="material-symbols-outlined"> receipt_long </span>
         <p class="uppercase font-semibold tracking-wider">extrato</p>
       </li>
-      <li class="flex-1/2 grid place-items-center" @click="logout">
+      <li class="flex-1/2 grid place-items-center cursor-pointer" @click="logout">
         <span class="material-symbols-outlined"> logout </span>
         <p class="uppercase font-semibold tracking-wider">sair</p>
       </li>

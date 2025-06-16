@@ -101,7 +101,7 @@ const generetePDF = () =>{
         </tr>
       </tbody>
     </table>
-    <button @click="generetePDF" class=" bg-blue-500 text-white font-semibold px-4 py-2 rounded ml-[50%] -translate-x-[50%] mt-[20px] mb-[20px]">
+    <button @click="generetePDF" class=" bg-blue-500 text-white font-semibold px-4 py-2 rounded ml-[50%] -translate-x-[50%] mt-[20px] mb-[20px] cursor-pointer">
       Baixar PDF
     </button>
   </section>

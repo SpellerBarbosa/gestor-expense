@@ -99,7 +99,7 @@ onMounted(async()=>{
           @change="handleFileChange"
         />
         <button
-          class="bg-gray-700 absolute w-full h-[25px] bottom-0 flex items-center justify-center"
+          class="bg-gray-700 absolute w-full h-[25px] bottom-0 flex items-center justify-center cursor-pointer"
           @click="handleClickImage"
         >
           <span class="material-symbols-outlined"> add_a_photo </span>

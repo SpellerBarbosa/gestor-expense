@@ -117,7 +117,7 @@ const handlerSignup = async () => {
     />
     <button
       type="submit"
-      class="w-[120px] h-[50px] bg-white rounded-xl mt-[10px] uppercase tracking-wider font-bold text-blue-700 lg:w-[180px] lg:h-[70px] text-xl"
+      class="w-[120px] h-[50px] bg-white rounded-xl mt-[10px] uppercase tracking-wider font-bold text-blue-700 lg:w-[180px] lg:h-[70px] text-xl cursor-pointer"
     >
       cadastrar
     </button>

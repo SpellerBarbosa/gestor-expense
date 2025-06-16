@@ -249,7 +249,7 @@
 				</select>
 				<div class="flex gap-5">
 					<button
-						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold bg-yellow-600 rounded-2xl text-white"
+						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold bg-yellow-600 rounded-2xl text-white cursor-pointer"
 						:class="save ? 'hidden' : 'block'"
 						type="button"
 						@click.prevent="handleEdit"
@@ -257,7 +257,7 @@
 						editar
 					</button>
 					<button
-						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold"
+						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold cursor-pointer"
 						:class="
 							save
 								? 'flex items-center justify-center bg-green-600 text-white rounded-2xl text-shadow-2xs '
@@ -290,7 +290,7 @@
 						</svg>
 					</button>
 					<button
-						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold bg-red-700 rounded-2xl text-white flex items-center justify-center transition-all duration-500"
+						class="w-[150px] h-[50px] uppercase tracking-wider font-semibold bg-red-700 rounded-2xl text-white flex items-center justify-center transition-all duration-500 cursor-pointer"
 						type="button"
 						:disabled="isLoading"
 						@click="handleDeleteExpense"

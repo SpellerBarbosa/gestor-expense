@@ -97,7 +97,7 @@ const handleSubmitLogin = async () => {
           input-type="password"
         />
         <button
-          class="w-[180px] h-[50px] bg-white rounded-2xl text-blue-700 font-bold uppercase tracking-wider md:w-[200px] md:h-[70px] md:rounded-3xl md:text-2xl flex items-center justify-center"
+          class="w-[180px] h-[50px] bg-white rounded-2xl text-blue-700 font-bold uppercase tracking-wider md:w-[200px] md:h-[70px] md:rounded-3xl md:text-2xl flex items-center justify-center cursor-pointer"
           :disabled="isLoading"
         >
           {{ isLoading ? "Entrando" : "Entrar" }}
@@ -131,7 +131,7 @@ const handleSubmitLogin = async () => {
         Não tem um conta ?
         <nuxt-link
           to="/signup"
-          class="border-b-1 hover:border-b-2 border-transparent hover:text-black hover:border-white"
+          class="border-b-1 hover:border-b-2 border-transparent hover:text-black hover:border-white cursor-pointer"
         >
           cadastre-se</nuxt-link
         >

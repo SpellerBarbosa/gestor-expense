@@ -178,7 +178,7 @@ const handlerSubmitExpense = async () => {
     </select>
     <button
       @click.prevent="handlerSubmitExpense"
-      class="uppercase w-[120px] h-[50px] rounded-xl bg-[#ffffff] font-semibold tracking-wider border-none flex items-center justify-center"
+      class="uppercase w-[120px] h-[50px] rounded-xl bg-[#ffffff] font-semibold tracking-wider border-none flex items-center justify-center cursor-pointer"
       :disabled="isLoading"
     >
       {{ isLoading ? "Salvando" : "salvar" }}
@@ -207,7 +207,7 @@ const handlerSubmitExpense = async () => {
     <Error :message="msgError" :visible="!!msgError" />
     <Success :message="msgSuccess" :visible="!!msgSuccess" />
     <button
-      class="border w-[30px] h-[30px] border-white absolute top-5 right-5 grid place-items-center"
+      class="border w-[30px] h-[30px] border-white absolute top-5 right-5 grid place-items-center cursor-pointer"
       @click="stateMenu.stateMenu()"
     >
       <span
